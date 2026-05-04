@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>SARR Institute of Technology | Student Portal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #f5f7fb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #1a2236;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 640px;
+      background: #ffffff;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+      border-radius: 28px;
+      padding: 36px 32px 32px;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    /* ----- institute branding ----- */
+    .institute-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .shield-emblem {
+      width: 46px;
+      height: 52px;
+      background: #0b2545;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: #0b2545;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #3a4b6b;
+      letter-spacing: 1.8px;
+    }
+
+    .founder-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0 18px;
+      padding: 10px 16px;
+      background: #f0f4fe;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #172b4d;
+      border-left: 4px solid #0b2545;
+      flex-wrap: wrap;
+    }
+
+    .founder-strip strong {
+      font-weight: 700;
+      color: #0b2545;
+    }
+
+    .founder-title {
+      font-size: 0.72rem;
+      background: #dbe5f5;
+      padding: 3px 10px;
+      border-radius: 16px;
+      font-weight: 600;
+      color: #0f2b4f;
+      white-space: nowrap;
+    }
+
+    /* ----- auth section ----- */
+    .auth-label {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #253858;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .auth-label::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: #0b2545;
+      border-radius: 2px;
+    }
+
+    .auth-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid #e9edf4;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #445577;
+    }
+
+    .input-field {
+      display: flex;
+      align-items: center;
+      background: #f9fafc;
+      border: 1px solid #dce2ec;
+      border-radius: 12px;
+      padding: 4px 14px;
+      transition: 0.2s;
+    }
+
+    .input-field:focus-within {
+      border-color: #0b2545;
+      box-shadow: 0 0 0 3px rgba(11, 37, 69, 0.07);
+      background: #ffffff;
+    }
+
+    .input-field input {
+      width: 100%;
+      border: none;
+      padding: 13px 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: transparent;
+      outline: none;
+      color: #0b2545;
+      letter-spacing: 0.2px;
+    }
+
+    .input-field input::placeholder {
+      color: #8997b3;
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    .input-icon {
+      color: #5b6e91;
+      margin-right: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 24px;
+      border-radius: 40px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-primary {
+      background: #0b2545;
+      color: white;
+      box-shadow: 0 8px 16px -6px rgba(11, 37, 69, 0.3);
+      margin-top: 6px;
+    }
+
+    .btn-primary:hover {
+      background: #14315a;
+      box-shadow: 0 12px 20px -8px rgba(11, 37, 69, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .error-message {
+      background: #fff5f5;
+      color: #b91c1c;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: 500;
+      margin: 12px 0 4px;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #fecaca;
+    }
+
+    .hint-text {
+      font-size: 0.78rem;
+      color: #657594;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .hint-text strong {
+      font-weight: 600;
+      color: #1e3250;
+    }
+
+    /* ----- portal dashboard ----- */
+    .student-profile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafd;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+      border: 1px solid #eef2f7;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .profile-info h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0b2545;
+    }
+
+    .profile-info .program {
+      color: #3c5078;
+      font-weight: 500;
+      font-size: 0.88rem;
+      margin-top: 3px;
+    }
+
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .roll-badge {
+      background: white;
+      padding: 5px 16px;
+      border-radius: 24px;
+      font-weight: 600;
+      color: #0b2545;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      border: 1px solid #dde4f0;
+      word-break: break-all;
+    }
+
+    .email-badge {
+      font-size: 0.7rem;
+      color: #4a5f82;
+      font-weight: 500;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #13294e;
+      margin: 18px 0 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .section-heading::before {
+      content: "";
+      width: 5px;
+      height: 18px;
+      background: #0b2545;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .course-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid #edf1f8;
+      margin-bottom: 8px;
+    }
+
+    .course-title {
+      font-weight: 600;
+      color: #172b4d;
+      font-size: 0.95rem;
+    }
+
+    .status-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: #e6f0e9;
+      color: #115532;
+      letter-spacing: 0.2px;
+    }
+
+    .certificate-panel {
+      background: #fafbfc;
+      border: 1px solid #e3e9f3;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin: 18px 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .cert-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cert-icon-placeholder {
+      width: 40px;
+      height: 40px;
+      background: #e9eff6;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1d3557;
+    }
+
+    .cert-score {
+      font-weight: 800;
+      font-size: 2rem;
+      color: #0b2545;
+      line-height: 1.2;
+    }
+
+    .cert-meta {
+      font-weight: 500;
+      color: #4a5b79;
+      font-size: 0.8rem;
+    }
+
+    .cert-tier {
+      background: #ffffff;
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid #cddaf0;
+      color: #1b3352;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #cdd8ec;
+      color: #1f2b4b;
+      font-weight: 600;
+      padding: 12px 20px;
+      margin-top: 10px;
+      background: white;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #f6f9ff;
+      border-color: #95aacf;
+    }
+
+    .footer-note {
+      font-size: 0.7rem;
+      color: #697a9b;
+      text-align: center;
+      margin-top: 12px;
+      letter-spacing: 0.2px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    hr {
+      border: 0.5px solid #e2e8f2;
+      margin: 14px 0 8px;
+    }
+
+    .gender-tag {
+      font-size: 0.7rem;
+      background: #f3f0ff;
+      color: #3d2f7b;
+      padding: 2px 10px;
+      border-radius: 14px;
+      margin-left: 6px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Institute Header -->
+    <div class="institute-header">
+      <div class="shield-emblem">S</div>
+      <div class="brand-text">
+        <span class="brand-name">SARR</span>
+        <span class="brand-sub">Institute of Technology</span>
+      </div>
+    </div>
+    <div class="founder-strip">
+      <strong>Prof. Muhammad Sohaib Aftab</strong>
+      <span class="founder-title">Cybersecurity Scientist</span>
+      <span style="margin-left: auto; font-size:0.73rem; color:#405575;">Founder & Lead Professor</span>
+    </div>
+
+    <!-- AUTH / LOGIN SECTION -->
+    <div id="authSection">
+      <div class="auth-label">Student Access Portal</div>
+      <div class="auth-card">
+        <div class="input-group">
+          <label>Email Address</label>
+          <div class="input-field">
+            <span class="input-icon">@</span>
+            <input type="email" id="emailInput" placeholder="adebach211@gmail.com" autocomplete="email">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-field">
+            <span class="input-icon">*</span>
+            <input type="password" id="passwordInput" placeholder="············" autocomplete="current-password">
+          </div>
+        </div>
+        <button class="btn btn-primary" id="loginButton">
+          Sign In to Portal
+        </button>
+        <div id="loginError" class="error-message hidden">
+          <span id="errorText"></span>
+        </div>
+        <div class="hint-text">
+          Demo credentials: <strong>adebach211@gmail.com</strong> / <strong>sarr-12345678</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTAL DASHBOARD SECTION -->
+    <div id="portalSection" class="hidden">
+      <div class="student-profile">
+        <div class="profile-info">
+          <h3 id="studentName">Student Name</h3>
+          <div class="program" id="studentProgram">Program</div>
+        </div>
+        <div class="profile-meta">
+          <div class="roll-badge" id="displayRoll">ROLL</div>
+          <div class="email-badge" id="displayEmail">email</div>
+          <div id="displayGender" style="font-size:0.7rem; color:#4a5568;"></div>
+        </div>
+      </div>
+
+      <div class="section-heading">Enrolled Program</div>
+      <div id="courseContainer">
+        <!-- course rendered dynamically -->
+      </div>
+
+      <div class="section-heading" style="margin-top: 20px;">Certificate Value</div>
+      <div class="certificate-panel">
+        <div class="cert-left">
+          <div class="cert-icon-placeholder">C</div>
+          <div>
+            <div class="cert-meta">Certificate Score</div>
+            <div class="cert-score" id="certValueDisplay">0.0</div>
+          </div>
+        </div>
+        <div class="cert-tier" id="certLevel">Tier</div>
+      </div>
+
+      <button class="btn btn-outline" id="logoutButton">
+        Sign Out & Return
+      </button>
+      <div class="footer-note">
+        SARR Institute of Technology — Prof. Muhammad Sohaib Aftab
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ---------- SARR INSTITUTE STUDENT DATABASE ----------
+      // Credentials: email + password + student record
+      const studentDatabase = {
+        "adebach211@gmail.com": {
+          password: "sarr-12345678",
+          student: {
+            name: "Ade Bach",
+            roll: "SARR-1775201251238-XK363P",
+            email: "adebach211@gmail.com",
+            gender: "Female",
+            program: "Digital Freelance Starter Program",
+            courses: [
+              { name: "Digital Freelance Starter Program", status: "Active" }
+            ],
+            certificateValue: 88.5,
+            certificateLevel: "Silver · Practitioner"
+          }
+        },
+        "student@sarr.edu": {
+          password: "demo1234",
+          student: {
+            name: "Demo Student",
+            roll: "SARR-2024-DEMO001",
+            email: "student@sarr.edu",
+            gender: "Male",
+            program: "Cybersecurity Fundamentals",
+            courses: [
+              { name: "Network Security Basics", status: "Completed" },
+              { name: "Ethical Hacking Intro", status: "In Progress" }
+            ],
+            certificateValue: 76.0,
+            certificateLevel: "Bronze · Learner"
+          }
+        }
+      };
+
+      // DOM elements
+      const authSection = document.getElementById('authSection');
+      const portalSection = document.getElementById('portalSection');
+      const emailInput = document.getElementById('emailInput');
+      const passwordInput = document.getElementById('passwordInput');
+      const loginButton = document.getElementById('loginButton');
+      const loginError = document.getElementById('loginError');
+      const errorText = document.getElementById('errorText');
+      
+      const studentNameEl = document.getElementById('studentName');
+      const studentProgramEl = document.getElementById('studentProgram');
+      const displayRollEl = document.getElementById('displayRoll');
+      const displayEmailEl = document.getElementById('displayEmail');
+      const displayGenderEl = document.getElementById('displayGender');
+      const courseContainer = document.getElementById('courseContainer');
+      const certValueDisplay = document.getElementById('certValueDisplay');
+      const certLevelEl = document.getElementById('certLevel');
+      const logoutButton = document.getElementById('logoutButton');
+
+      function showError(message) {
+        errorText.textContent = message;
+        loginError.classList.remove('hidden');
+      }
+
+      function hideError() {
+        loginError.classList.add('hidden');
+      }
+
+      function resetAuthForm() {
+        emailInput.value = '';
+        passwordInput.value = '';
+        hideError();
+      }
+
+      function renderPortal(student) {
+        studentNameEl.textContent = student.name;
+        studentProgramEl.textContent = student.program;
+        displayRollEl.textContent = student.roll;
+        displayEmailEl.textContent = student.email;
+        displayGenderEl.innerHTML = `Gender: ${student.gender} <span class="gender-tag">${student.gender}</span>`;
+        
+        courseContainer.innerHTML = '';
+        if (student.courses && student.courses.length > 0) {
+          student.courses.forEach(course => {
+            const card = document.createElement('div');
+            card.className = 'course-card';
+            card.innerHTML = `
+              <span class="course-title">${course.name}</span>
+              <span class="status-badge">${course.status}</span>
+            `;
+            courseContainer.appendChild(card);
+          });
+        } else {
+          courseContainer.innerHTML = '<div class="course-card"><span class="course-title">No active enrollments</span></div>';
+        }
+
+        certValueDisplay.textContent = student.certificateValue.toFixed(1);
+        certLevelEl.textContent = student.certificateLevel;
+      }
+
+      function showPortal(student) {
+        renderPortal(student);
+        authSection.classList.add('hidden');
+        portalSection.classList.remove('hidden');
+      }
+
+      function showAuth() {
+        portalSection.classList.add('hidden');
+        authSection.classList.remove('hidden');
+        resetAuthForm();
+        emailInput.focus();
+      }
+
+      function handleLogin() {
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
+
+        if (email === '') {
+          showError('Please enter your email address.');
+          emailInput.focus();
+          return;
+        }
+
+        if (password === '') {
+          showError('Please enter your password.');
+          passwordInput.focus();
+          return;
+        }
+
+        const record = studentDatabase[email];
+
+        if (!record) {
+          showError('Email not recognized. Please check your credentials.');
+          return;
+        }
+
+        if (record.password !== password) {
+          showError('Incorrect password. Please try again.');
+          return;
+        }
+
+        hideError();
+        showPortal(record.student);
+      }
+
+      loginButton.addEventListener('click', handleLogin);
+
+      // Enter key triggers login
+      emailInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          passwordInput.focus();
+        }
+      });
+
+      passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleLogin();
+        }
+      });
+
+      logoutButton.addEventListener('click', showAuth);
+
+      // Clear error on input
+      emailInput.addEventListener('input', hideError);
+      passwordInput.addEventListener('input', hideError);
+
+      window.addEventListener('load', () => {
+        emailInput.focus();
+      });
+
+      // Quick fill via hint click
+      const hintText = document.querySelector('.hint-text');
+      if (hintText) {
+        hintText.style.cursor = 'pointer';
+        hintText.addEventListener('click', (e) => {
+          emailInput.value = 'adebach211@gmail.com';
+          passwordInput.value = 'sarr-12345678';
+          hideError();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
