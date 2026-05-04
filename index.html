@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>SARR Institute of Technology | Student Portal</title>
+  <title>SARR Institute of Technology | Portal</title>
   <style>
     * {
       margin: 0;
@@ -26,13 +26,15 @@
 
     .container {
       width: 100%;
-      max-width: 660px;
+      max-width: 720px;
       background: #ffffff;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
       border-radius: 28px;
       padding: 36px 32px 32px;
       transition: all 0.25s ease;
       border: 1px solid rgba(0, 0, 0, 0.04);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     /* ----- institute branding ----- */
@@ -109,7 +111,6 @@
       white-space: nowrap;
     }
 
-    /* ----- auth section ----- */
     .auth-label {
       font-size: 1.05rem;
       font-weight: 600;
@@ -168,7 +169,8 @@
       background: #ffffff;
     }
 
-    .input-field input {
+    .input-field input,
+    .input-field select {
       width: 100%;
       border: none;
       padding: 13px 0;
@@ -178,6 +180,12 @@
       outline: none;
       color: #0b2545;
       letter-spacing: 0.2px;
+    }
+
+    .input-field select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .input-field input::placeholder {
@@ -226,6 +234,39 @@
       transform: translateY(0);
     }
 
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+      box-shadow: 0 8px 16px -6px rgba(220, 38, 38, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      width: auto;
+      border-radius: 20px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #cdd8ec;
+      color: #1f2b4b;
+      font-weight: 600;
+      padding: 12px 20px;
+      margin-top: 10px;
+      background: white;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #f6f9ff;
+      border-color: #95aacf;
+    }
+
     .error-message {
       background: #fff5f5;
       color: #b91c1c;
@@ -238,6 +279,20 @@
       align-items: center;
       gap: 8px;
       border: 1px solid #fecaca;
+    }
+
+    .success-message {
+      background: #f0fdf4;
+      color: #166534;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: 500;
+      margin: 12px 0 4px;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #bbf7d0;
     }
 
     .hint-text {
@@ -274,6 +329,22 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
       flex-shrink: 0;
       background: #e9eff6;
+    }
+
+    .avatar-fallback {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #e9eff6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #1d3557;
+      flex-shrink: 0;
+      border: 3px solid #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     }
 
     .profile-details {
@@ -444,28 +515,94 @@
       border: 1px solid #fecaca;
     }
 
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid #cdd8ec;
-      color: #1f2b4b;
-      font-weight: 600;
-      padding: 12px 20px;
-      margin-top: 10px;
+    /* ----- admin panel ----- */
+    .admin-panel {
+      background: #fefbf0;
+      border: 2px solid #f0c040;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .admin-panel h3 {
+      color: #7a5d00;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 500px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .student-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       background: white;
-      box-shadow: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      border: 1px solid #e5e7eb;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .btn-outline:hover {
-      background: #f6f9ff;
-      border-color: #95aacf;
+    .student-list-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 150px;
     }
 
-    .footer-note {
-      font-size: 0.7rem;
-      color: #697a9b;
+    .student-list-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      background: #e9eff6;
+    }
+
+    .photo-upload-area {
+      border: 2px dashed #d0d8e8;
+      border-radius: 12px;
+      padding: 14px;
       text-align: center;
-      margin-top: 12px;
-      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: 0.2s;
+      background: #fafbfd;
+    }
+
+    .photo-upload-area:hover {
+      border-color: #0b2545;
+      background: #f0f4fe;
+    }
+
+    .photo-upload-area input[type="file"] {
+      display: none;
+    }
+
+    .preview-thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 6px auto;
+      display: block;
+      border: 2px solid #e5e7eb;
     }
 
     .hidden {
@@ -479,7 +616,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="appContainer">
     <!-- Institute Header -->
     <div class="institute-header">
       <div class="shield-emblem">S</div>
@@ -496,62 +633,55 @@
 
     <!-- AUTH / LOGIN SECTION -->
     <div id="authSection">
-      <div class="auth-label">Student Access Portal</div>
+      <div class="auth-label">Portal Access</div>
       <div class="auth-card">
         <div class="input-group">
           <label>Email Address</label>
           <div class="input-field">
-            <span class="input-icon"></span>
-            <input type="email" id="emailInput" placeholder="Your Email" autocomplete="email">
+            <span class="input-icon">@</span>
+            <input type="email" id="emailInput" placeholder="student@sarr.edu" autocomplete="email">
           </div>
         </div>
         <div class="input-group">
           <label>Password</label>
           <div class="input-field">
-            <span class="input-icon"></span>
+            <span class="input-icon">*</span>
             <input type="password" id="passwordInput" placeholder="············" autocomplete="current-password">
           </div>
         </div>
         <button class="btn btn-primary" id="loginButton">
-          Sign In to Portal
+          Sign In
         </button>
         <div id="loginError" class="error-message hidden">
           <span id="errorText"></span>
         </div>
         <div class="hint-text">
-          <!--Demo credentials: <strong>adebach211@gmail.com</strong> / <strong>sarr-12345678</strong-->
+          Student: <strong>adebach211@gmail.com</strong> / <strong>sarr-12345678</strong><br>
+          Admin: <strong>sarr.edu.pk@gmail.com</strong> / <strong>Admin-3421</strong>
         </div>
       </div>
     </div>
 
-    <!-- PORTAL DASHBOARD SECTION -->
-    <div id="portalSection" class="hidden">
-      <div class="student-profile">
-        <img
-          src="https://canva.link/okpmo43ij38rjmz"
-          alt="Student Photo"
-          class="student-avatar"
-          id="studentPhoto"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-        >
-        <div class="shield-emblem" style="display:none; width:68px; height:68px; border-radius:50%; font-size:1.6rem;" id="avatarFallback">AR</div>
+    <!-- STUDENT PORTAL DASHBOARD -->
+    <div id="studentPortalSection" class="hidden">
+      <div class="student-profile" id="studentProfileContainer">
+        <img src="" alt="Student Photo" class="student-avatar hidden" id="studentPhoto">
+        <div class="avatar-fallback" id="avatarFallback">AR</div>
         <div class="profile-details">
           <h3>
-            <span id="studentName">Adeeba Rani</span>
-            <span class="gender-tag" id="displayGenderTag">Female</span>
+            <span id="studentName">Student Name</span>
+            <span class="gender-tag" id="displayGenderTag">Gender</span>
           </h3>
-          <div class="program-name" id="studentProgram">Digital Freelance Starter Program</div>
+          <div class="program-name" id="studentProgram">Program</div>
           <div class="profile-meta-row">
-            <span class="meta-badge" id="displayRoll">SARR-1775201251238-XK363P</span>
-            <span class="email-badge" id="displayEmail">adebach211@gmail.com</span>
+            <span class="meta-badge" id="displayRoll">Roll</span>
+            <span class="email-badge" id="displayEmail">email</span>
           </div>
         </div>
       </div>
 
       <div class="section-heading">Enrolled Program</div>
-      <div id="courseContainer">
-        <!-- course rendered dynamically -->
-      </div>
+      <div id="studentCourseContainer"></div>
 
       <div class="section-heading" style="margin-top: 20px;">Certificate Value</div>
       <div class="certificate-panel">
@@ -559,132 +689,310 @@
           <div class="cert-icon-placeholder">C</div>
           <div>
             <div class="cert-meta">Certificate Score</div>
-            <div class="cert-score" id="certValueDisplay">2.86</div>
+            <div class="cert-score" id="certValueDisplay">0.00</div>
           </div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
-          <div class="cert-tier" id="certLevel">Bronze · Beginner</div>
-          <span class="cert-percent">2.8572%</span>
+          <div class="cert-tier" id="certLevel">Tier</div>
+          <span class="cert-percent" id="certPercentDisplay">0%</span>
         </div>
       </div>
 
-      <button class="btn btn-outline" id="logoutButton">
-        Sign Out & Return
+      <button class="btn btn-outline" id="studentLogoutButton">
+        Sign Out
       </button>
       <div class="footer-note">
         SARR Institute of Technology — Prof. Muhammad Sohaib Aftab
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanelSection" class="hidden">
+      <div class="admin-panel">
+        <h3>Admin Dashboard</h3>
+        <div id="adminMessage" class="success-message hidden"></div>
+        <div id="adminError" class="error-message hidden"></div>
+
+        <div style="margin-bottom:16px;">
+          <strong style="color:#0b2545;">Select Student to Edit:</strong>
+          <div id="studentListContainer" style="margin-top:10px;">
+            <!-- student list rendered dynamically -->
+          </div>
+        </div>
+
+        <div id="editFormContainer" class="hidden">
+          <hr style="margin:16px 0;">
+          <strong style="color:#0b2545; display:block; margin-bottom:12px;">Edit Student Details</strong>
+          <div class="admin-grid">
+            <div class="input-group">
+              <label>Full Name</label>
+              <div class="input-field">
+                <input type="text" id="editName" placeholder="Adeeba Rani">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Roll Number</label>
+              <div class="input-field">
+                <input type="text" id="editRoll" placeholder="SARR-...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Email</label>
+              <div class="input-field">
+                <input type="email" id="editEmail" placeholder="student@...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Password</label>
+              <div class="input-field">
+                <input type="text" id="editPassword" placeholder="password">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Gender</label>
+              <div class="input-field">
+                <select id="editGender">
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Program</label>
+              <div class="input-field">
+                <input type="text" id="editProgram" placeholder="Program name">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Certificate Score (%)</label>
+              <div class="input-field">
+                <input type="number" id="editCertValue" placeholder="2.8572" step="0.0001" min="0" max="100">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Certificate Tier</label>
+              <div class="input-field">
+                <input type="text" id="editCertLevel" placeholder="Bronze · Beginner">
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group" style="margin-top:14px;">
+            <label>Student Photo</label>
+            <div class="photo-upload-area" id="photoUploadArea">
+              <span id="uploadPlaceholder">Click to upload photo (or paste image URL below)</span>
+              <img id="photoPreview" class="preview-thumb hidden" src="" alt="Preview">
+              <input type="file" id="photoFileInput" accept="image/*">
+            </div>
+            <div class="input-field" style="margin-top:6px;">
+              <span class="input-icon">🔗</span>
+              <input type="text" id="editPhotoUrl" placeholder="Or paste image URL (e.g. https://canva.link/...)">
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm" id="saveStudentBtn" style="flex:1;">Save Changes</button>
+            <button class="btn btn-danger btn-sm" id="deleteStudentBtn" style="flex:1;">Delete Student</button>
+            <button class="btn btn-outline btn-sm" id="addNewStudentBtn" style="flex:1;">Add New Student</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-outline" id="adminLogoutButton">
+        Sign Out
+      </button>
+      <div class="footer-note">
+        SARR Institute of Technology — Admin Panel
       </div>
     </div>
   </div>
 
   <script>
     (function() {
-      // ---------- SARR INSTITUTE STUDENT DATABASE ----------
-      const studentDatabase = {
+      // ---------- DEFAULT STUDENT DATABASE ----------
+      const DEFAULT_STUDENTS = {
         "adebach211@gmail.com": {
           password: "sarr-12345678",
-          student: {
-            name: "Adeeba Rani",
-            roll: "SARR-1775201251238-XK363P",
-            email: "adebach211@gmail.com",
-            gender: "Female",
-            program: "Digital Freelance Starter Program",
-            photoUrl: "https://canva.link/okpmo43ij38rjmz",
-            courses: [
-              { name: "Digital Freelance Starter Program", status: "Active" }
-            ],
-            certificateValue: 2.8572,
-            certificateLevel: "Bronze · Beginner"
-          }
+          name: "Adeeba Rani",
+          roll: "SARR-1775201251238-XK363P",
+          email: "adebach211@gmail.com",
+          gender: "Female",
+          program: "Digital Freelance Starter Program",
+          photoUrl: "https://canva.link/okpmo43ij38rjmz",
+          courses: [
+            { name: "Digital Freelance Starter Program", status: "Active" }
+          ],
+          certificateValue: 2.8572,
+          certificateLevel: "Bronze · Beginner"
         },
         "student@sarr.edu": {
           password: "demo1234",
-          student: {
-            name: "Demo Student",
-            roll: "SARR-2024-DEMO001",
-            email: "student@sarr.edu",
-            gender: "Male",
-            program: "Cybersecurity Fundamentals",
-            photoUrl: "",
-            courses: [
-              { name: "Network Security Basics", status: "Completed" },
-              { name: "Ethical Hacking Intro", status: "In Progress" }
-            ],
-            certificateValue: 76.0,
-            certificateLevel: "Silver · Advanced"
-          }
+          name: "Demo Student",
+          roll: "SARR-2024-DEMO001",
+          email: "student@sarr.edu",
+          gender: "Male",
+          program: "Cybersecurity Fundamentals",
+          photoUrl: "",
+          courses: [
+            { name: "Network Security Basics", status: "Completed" },
+            { name: "Ethical Hacking Intro", status: "In Progress" }
+          ],
+          certificateValue: 76.0,
+          certificateLevel: "Silver · Advanced"
         }
       };
 
-      // DOM elements
+      const ADMIN_EMAIL = "sarr.edu.pk@gmail.com";
+      const ADMIN_PASSWORD = "Admin-3421";
+
+      // ---------- LOAD / SAVE FROM LOCALSTORAGE ----------
+      function loadStudents() {
+        const stored = localStorage.getItem('sarr_students');
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch (e) {
+            return { ...DEFAULT_STUDENTS };
+          }
+        }
+        return { ...DEFAULT_STUDENTS };
+      }
+
+      function saveStudents(students) {
+        localStorage.setItem('sarr_students', JSON.stringify(students));
+      }
+
+      let studentDatabase = loadStudents();
+
+      // Persist on first load if not exists
+      if (!localStorage.getItem('sarr_students')) {
+        saveStudents(studentDatabase);
+      }
+
+      // ---------- DOM ELEMENTS ----------
       const authSection = document.getElementById('authSection');
-      const portalSection = document.getElementById('portalSection');
+      const studentPortalSection = document.getElementById('studentPortalSection');
+      const adminPanelSection = document.getElementById('adminPanelSection');
       const emailInput = document.getElementById('emailInput');
       const passwordInput = document.getElementById('passwordInput');
       const loginButton = document.getElementById('loginButton');
       const loginError = document.getElementById('loginError');
       const errorText = document.getElementById('errorText');
-      
+
+      // Student portal elements
+      const studentPhoto = document.getElementById('studentPhoto');
+      const avatarFallback = document.getElementById('avatarFallback');
       const studentNameEl = document.getElementById('studentName');
       const studentProgramEl = document.getElementById('studentProgram');
       const displayRollEl = document.getElementById('displayRoll');
       const displayEmailEl = document.getElementById('displayEmail');
       const displayGenderTag = document.getElementById('displayGenderTag');
-      const studentPhoto = document.getElementById('studentPhoto');
-      const avatarFallback = document.getElementById('avatarFallback');
-      const courseContainer = document.getElementById('courseContainer');
+      const studentCourseContainer = document.getElementById('studentCourseContainer');
       const certValueDisplay = document.getElementById('certValueDisplay');
       const certLevelEl = document.getElementById('certLevel');
-      const logoutButton = document.getElementById('logoutButton');
+      const certPercentDisplay = document.getElementById('certPercentDisplay');
+      const studentLogoutButton = document.getElementById('studentLogoutButton');
+      const adminLogoutButton = document.getElementById('adminLogoutButton');
 
-      function showError(message) {
+      // Admin elements
+      const adminMessage = document.getElementById('adminMessage');
+      const adminError = document.getElementById('adminError');
+      const studentListContainer = document.getElementById('studentListContainer');
+      const editFormContainer = document.getElementById('editFormContainer');
+      const editName = document.getElementById('editName');
+      const editRoll = document.getElementById('editRoll');
+      const editEmail = document.getElementById('editEmail');
+      const editPassword = document.getElementById('editPassword');
+      const editGender = document.getElementById('editGender');
+      const editProgram = document.getElementById('editProgram');
+      const editCertValue = document.getElementById('editCertValue');
+      const editCertLevel = document.getElementById('editCertLevel');
+      const editPhotoUrl = document.getElementById('editPhotoUrl');
+      const photoFileInput = document.getElementById('photoFileInput');
+      const photoPreview = document.getElementById('photoPreview');
+      const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+      const photoUploadArea = document.getElementById('photoUploadArea');
+      const saveStudentBtn = document.getElementById('saveStudentBtn');
+      const deleteStudentBtn = document.getElementById('deleteStudentBtn');
+      const addNewStudentBtn = document.getElementById('addNewStudentBtn');
+
+      let currentEditingEmail = null;
+      let pendingPhotoDataUrl = null;
+
+      // ---------- HELPER FUNCTIONS ----------
+      function showAuthError(message) {
         errorText.textContent = message;
         loginError.classList.remove('hidden');
       }
 
-      function hideError() {
+      function hideAuthError() {
         loginError.classList.add('hidden');
+      }
+
+      function showAdminMessage(message) {
+        adminMessage.textContent = message;
+        adminMessage.classList.remove('hidden');
+        adminError.classList.add('hidden');
+        setTimeout(() => adminMessage.classList.add('hidden'), 3000);
+      }
+
+      function showAdminError(message) {
+        adminError.textContent = message;
+        adminError.classList.remove('hidden');
+        adminMessage.classList.add('hidden');
+        setTimeout(() => adminError.classList.add('hidden'), 3000);
       }
 
       function resetAuthForm() {
         emailInput.value = '';
         passwordInput.value = '';
-        hideError();
+        hideAuthError();
       }
 
       function getInitials(name) {
         if (!name) return 'S';
         const parts = name.trim().split(' ');
         if (parts.length >= 2) {
-          return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+          return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
         }
         return name.substring(0, 2).toUpperCase();
       }
 
-      function renderPortal(student) {
+      function showAuthSection() {
+        studentPortalSection.classList.add('hidden');
+        adminPanelSection.classList.add('hidden');
+        authSection.classList.remove('hidden');
+        resetAuthForm();
+        emailInput.focus();
+      }
+
+      // ---------- RENDER STUDENT PORTAL ----------
+      function renderStudentPortal(student) {
         studentNameEl.textContent = student.name;
         studentProgramEl.textContent = student.program;
         displayRollEl.textContent = student.roll;
         displayEmailEl.textContent = student.email;
         displayGenderTag.textContent = student.gender;
 
-        // Handle student photo
+        // Photo
         if (student.photoUrl && student.photoUrl.trim() !== '') {
           studentPhoto.src = student.photoUrl;
-          studentPhoto.style.display = 'block';
-          avatarFallback.style.display = 'none';
+          studentPhoto.classList.remove('hidden');
+          avatarFallback.classList.add('hidden');
           studentPhoto.onerror = function() {
-            studentPhoto.style.display = 'none';
-            avatarFallback.style.display = 'flex';
+            studentPhoto.classList.add('hidden');
+            avatarFallback.classList.remove('hidden');
             avatarFallback.textContent = getInitials(student.name);
           };
         } else {
-          studentPhoto.style.display = 'none';
-          avatarFallback.style.display = 'flex';
+          studentPhoto.classList.add('hidden');
+          avatarFallback.classList.remove('hidden');
           avatarFallback.textContent = getInitials(student.name);
         }
-        
-        courseContainer.innerHTML = '';
+
+        // Courses
+        studentCourseContainer.innerHTML = '';
         if (student.courses && student.courses.length > 0) {
           student.courses.forEach(course => {
             const card = document.createElement('div');
@@ -693,61 +1001,266 @@
               <span class="course-title">${course.name}</span>
               <span class="status-badge">${course.status}</span>
             `;
-            courseContainer.appendChild(card);
+            studentCourseContainer.appendChild(card);
           });
         } else {
-          courseContainer.innerHTML = '<div class="course-card"><span class="course-title">No active enrollments</span></div>';
+          studentCourseContainer.innerHTML = '<div class="course-card"><span class="course-title">No active enrollments</span></div>';
         }
 
         certValueDisplay.textContent = student.certificateValue.toFixed(2);
         certLevelEl.textContent = student.certificateLevel;
+        certPercentDisplay.textContent = student.certificateValue.toFixed(4) + '%';
       }
 
-      function showPortal(student) {
-        renderPortal(student);
+      function showStudentPortal(student) {
+        renderStudentPortal(student);
         authSection.classList.add('hidden');
-        portalSection.classList.remove('hidden');
+        adminPanelSection.classList.add('hidden');
+        studentPortalSection.classList.remove('hidden');
       }
 
-      function showAuth() {
-        portalSection.classList.add('hidden');
-        authSection.classList.remove('hidden');
-        resetAuthForm();
-        emailInput.focus();
+      // ---------- RENDER ADMIN PANEL ----------
+      function renderStudentList() {
+        studentListContainer.innerHTML = '';
+        const emails = Object.keys(studentDatabase);
+        if (emails.length === 0) {
+          studentListContainer.innerHTML = '<p style="color:#6b7280; font-size:0.85rem;">No students in database.</p>';
+          return;
+        }
+        emails.forEach(email => {
+          const s = studentDatabase[email];
+          const div = document.createElement('div');
+          div.className = 'student-list-item';
+          div.innerHTML = `
+            <div class="student-list-info">
+              <img src="${s.photoUrl || ''}" class="student-list-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="${s.photoUrl ? '' : 'display:none;'}">
+              <div class="avatar-fallback" style="width:36px;height:36px;font-size:0.7rem;${s.photoUrl ? 'display:none;' : ''}">${getInitials(s.name)}</div>
+              <div>
+                <strong style="font-size:0.85rem;">${s.name}</strong>
+                <div style="font-size:0.7rem;color:#6b7280;">${s.email}</div>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm edit-student-btn" data-email="${email}">Edit</button>
+          `;
+          studentListContainer.appendChild(div);
+        });
+
+        // Attach edit button events
+        document.querySelectorAll('.edit-student-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const email = this.getAttribute('data-email');
+            loadStudentIntoEditor(email);
+          });
+        });
       }
 
+      function loadStudentIntoEditor(email) {
+        const student = studentDatabase[email];
+        if (!student) return;
+        currentEditingEmail = email;
+        editFormContainer.classList.remove('hidden');
+        editName.value = student.name;
+        editRoll.value = student.roll;
+        editEmail.value = student.email;
+        editPassword.value = student.password;
+        editGender.value = student.gender;
+        editProgram.value = student.program;
+        editCertValue.value = student.certificateValue;
+        editCertLevel.value = student.certificateLevel;
+        editPhotoUrl.value = student.photoUrl || '';
+        pendingPhotoDataUrl = null;
+        if (student.photoUrl && student.photoUrl.trim() !== '') {
+          photoPreview.src = student.photoUrl;
+          photoPreview.classList.remove('hidden');
+          uploadPlaceholder.classList.add('hidden');
+        } else {
+          photoPreview.classList.add('hidden');
+          uploadPlaceholder.classList.remove('hidden');
+        }
+        adminMessage.classList.add('hidden');
+        adminError.classList.add('hidden');
+      }
+
+      function clearEditor() {
+        currentEditingEmail = null;
+        editFormContainer.classList.add('hidden');
+        editName.value = '';
+        editRoll.value = '';
+        editEmail.value = '';
+        editPassword.value = '';
+        editGender.value = 'Female';
+        editProgram.value = '';
+        editCertValue.value = '';
+        editCertLevel.value = '';
+        editPhotoUrl.value = '';
+        pendingPhotoDataUrl = null;
+        photoPreview.classList.add('hidden');
+        uploadPlaceholder.classList.remove('hidden');
+        photoFileInput.value = '';
+      }
+
+      function renderAdminPanel() {
+        studentDatabase = loadStudents();
+        renderStudentList();
+        clearEditor();
+        authSection.classList.add('hidden');
+        studentPortalSection.classList.add('hidden');
+        adminPanelSection.classList.remove('hidden');
+      }
+
+      // ---------- PHOTO UPLOAD HANDLING ----------
+      photoUploadArea.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'INPUT') {
+          photoFileInput.click();
+        }
+      });
+
+      photoFileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          pendingPhotoDataUrl = e.target.result;
+          photoPreview.src = pendingPhotoDataUrl;
+          photoPreview.classList.remove('hidden');
+          uploadPlaceholder.classList.add('hidden');
+          editPhotoUrl.value = '';
+        };
+        reader.readAsDataURL(file);
+      });
+
+      editPhotoUrl.addEventListener('input', function() {
+        const url = this.value.trim();
+        if (url) {
+          pendingPhotoDataUrl = null;
+          photoPreview.src = url;
+          photoPreview.classList.remove('hidden');
+          uploadPlaceholder.classList.add('hidden');
+          photoFileInput.value = '';
+        } else if (!pendingPhotoDataUrl) {
+          photoPreview.classList.add('hidden');
+          uploadPlaceholder.classList.remove('hidden');
+        }
+      });
+
+      // ---------- SAVE / DELETE / ADD STUDENT ----------
+      saveStudentBtn.addEventListener('click', function() {
+        if (!currentEditingEmail) {
+          showAdminError('No student selected for editing.');
+          return;
+        }
+        const newEmail = editEmail.value.trim().toLowerCase();
+        if (!newEmail) {
+          showAdminError('Email cannot be empty.');
+          return;
+        }
+        // If email changed, check for conflicts (unless same as current)
+        if (newEmail !== currentEditingEmail && studentDatabase[newEmail]) {
+          showAdminError('A student with this email already exists.');
+          return;
+        }
+
+        const finalPhotoUrl = pendingPhotoDataUrl || editPhotoUrl.value.trim();
+
+        const updatedStudent = {
+          password: editPassword.value.trim() || 'password',
+          name: editName.value.trim() || 'Unnamed',
+          roll: editRoll.value.trim() || 'N/A',
+          email: newEmail,
+          gender: editGender.value,
+          program: editProgram.value.trim() || 'N/A',
+          photoUrl: finalPhotoUrl,
+          courses: studentDatabase[currentEditingEmail]?.courses || [],
+          certificateValue: parseFloat(editCertValue.value) || 0,
+          certificateLevel: editCertLevel.value.trim() || 'N/A'
+        };
+
+        // Remove old key if email changed
+        if (newEmail !== currentEditingEmail) {
+          delete studentDatabase[currentEditingEmail];
+        }
+        studentDatabase[newEmail] = updatedStudent;
+        saveStudents(studentDatabase);
+        showAdminMessage('Student saved successfully!');
+        currentEditingEmail = newEmail;
+        renderStudentList();
+      });
+
+      deleteStudentBtn.addEventListener('click', function() {
+        if (!currentEditingEmail) {
+          showAdminError('No student selected.');
+          return;
+        }
+        if (confirm(`Are you sure you want to delete student: ${currentEditingEmail}?`)) {
+          delete studentDatabase[currentEditingEmail];
+          saveStudents(studentDatabase);
+          showAdminMessage('Student deleted.');
+          clearEditor();
+          renderStudentList();
+        }
+      });
+
+      addNewStudentBtn.addEventListener('click', function() {
+        clearEditor();
+        currentEditingEmail = 'new-student-' + Date.now() + '@sarr.edu';
+        editFormContainer.classList.remove('hidden');
+        editEmail.value = currentEditingEmail;
+        editPassword.value = 'password123';
+        editName.value = '';
+        editRoll.value = '';
+        editGender.value = 'Female';
+        editProgram.value = '';
+        editCertValue.value = '0';
+        editCertLevel.value = 'Beginner';
+        editPhotoUrl.value = '';
+        pendingPhotoDataUrl = null;
+        photoPreview.classList.add('hidden');
+        uploadPlaceholder.classList.remove('hidden');
+        photoFileInput.value = '';
+        adminMessage.classList.add('hidden');
+        adminError.classList.add('hidden');
+      });
+
+      // ---------- LOGIN HANDLER ----------
       function handleLogin() {
         const email = emailInput.value.trim().toLowerCase();
         const password = passwordInput.value;
 
         if (email === '') {
-          showError('Please enter your email address.');
-          emailInput.focus();
+          showAuthError('Please enter your email address.');
           return;
         }
-
         if (password === '') {
-          showError('Please enter your password.');
-          passwordInput.focus();
+          showAuthError('Please enter your password.');
           return;
         }
 
+        // Check admin
+        if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+          hideAuthError();
+          resetAuthForm();
+          renderAdminPanel();
+          return;
+        }
+
+        // Check student
+        studentDatabase = loadStudents();
         const record = studentDatabase[email];
-
         if (!record) {
-          showError('Email not recognized. Please check your credentials.');
+          showAuthError('Email not recognized.');
           return;
         }
-
         if (record.password !== password) {
-          showError('Incorrect password. Please try again.');
+          showAuthError('Incorrect password.');
           return;
         }
 
-        hideError();
-        showPortal(record.student);
+        hideAuthError();
+        resetAuthForm();
+        showStudentPortal(record);
       }
 
+      // ---------- EVENT LISTENERS ----------
       loginButton.addEventListener('click', handleLogin);
 
       emailInput.addEventListener('keypress', (e) => {
@@ -764,26 +1277,37 @@
         }
       });
 
-      logoutButton.addEventListener('click', showAuth);
+      studentLogoutButton.addEventListener('click', showAuthSection);
+      adminLogoutButton.addEventListener('click', showAuthSection);
 
-      emailInput.addEventListener('input', hideError);
-      passwordInput.addEventListener('input', hideError);
-
-      window.addEventListener('load', () => {
-        emailInput.focus();
-      });
+      emailInput.addEventListener('input', hideAuthError);
+      passwordInput.addEventListener('input', hideAuthError);
 
       // Quick fill via hint click
       const hintText = document.querySelector('.hint-text');
       if (hintText) {
         hintText.style.cursor = 'pointer';
         hintText.addEventListener('click', (e) => {
-          emailInput.value = 'adebach211@gmail.com';
-          passwordInput.value = 'sarr-12345678';
-          hideError();
-          emailInput.focus();
+          const target = e.target;
+          if (target.tagName === 'STRONG') {
+            const text = target.textContent;
+            if (text.includes('@')) {
+              emailInput.value = text;
+              if (text === 'adebach211@gmail.com') {
+                passwordInput.value = 'sarr-12345678';
+              } else if (text === 'sarr.edu.pk@gmail.com') {
+                passwordInput.value = 'Admin-3421';
+              }
+            }
+            hideAuthError();
+          }
         });
       }
+
+      window.addEventListener('load', () => {
+        studentDatabase = loadStudents();
+        emailInput.focus();
+      });
     })();
   </script>
 </body>
