@@ -26,7 +26,7 @@
 
     .container {
       width: 100%;
-      max-width: 640px;
+      max-width: 660px;
       background: #ffffff;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
       border-radius: 28px;
@@ -40,7 +40,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .shield-emblem {
@@ -83,7 +83,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin: 8px 0 18px;
+      margin: 6px 0 18px;
       padding: 10px 16px;
       background: #f0f4fe;
       border-radius: 10px;
@@ -255,45 +255,73 @@
     /* ----- portal dashboard ----- */
     .student-profile {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 18px;
       background: #f8fafd;
       border-radius: 16px;
-      padding: 18px 20px;
+      padding: 20px 22px;
       margin-bottom: 22px;
       border: 1px solid #eef2f7;
       flex-wrap: wrap;
-      gap: 10px;
     }
 
-    .profile-info h3 {
-      font-size: 1.4rem;
+    .student-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+      background: #e9eff6;
+    }
+
+    .profile-details {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .profile-details h3 {
+      font-size: 1.35rem;
       font-weight: 700;
       color: #0b2545;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
-    .profile-info .program {
+    .gender-tag {
+      font-size: 0.65rem;
+      background: #f3f0ff;
+      color: #3d2f7b;
+      padding: 2px 10px;
+      border-radius: 14px;
+      font-weight: 600;
+    }
+
+    .program-name {
       color: #3c5078;
       font-weight: 500;
       font-size: 0.88rem;
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
-    .profile-meta {
+    .profile-meta-row {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    .roll-badge {
+    .meta-badge {
       background: white;
-      padding: 5px 16px;
-      border-radius: 24px;
+      padding: 4px 14px;
+      border-radius: 20px;
       font-weight: 600;
       color: #0b2545;
-      font-size: 0.8rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      font-size: 0.73rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
       border: 1px solid #dde4f0;
       word-break: break-all;
     }
@@ -406,6 +434,16 @@
       color: #1b3352;
     }
 
+    .cert-percent {
+      background: #fff5f5;
+      color: #b91c1c;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border: 1px solid #fecaca;
+    }
+
     .btn-outline {
       background: transparent;
       border: 1.5px solid #cdd8ec;
@@ -438,16 +476,6 @@
       border: 0.5px solid #e2e8f2;
       margin: 14px 0 8px;
     }
-
-    .gender-tag {
-      font-size: 0.7rem;
-      background: #f3f0ff;
-      color: #3d2f7b;
-      padding: 2px 10px;
-      border-radius: 14px;
-      margin-left: 6px;
-      font-weight: 600;
-    }
   </style>
 </head>
 <body>
@@ -473,14 +501,14 @@
         <div class="input-group">
           <label>Email Address</label>
           <div class="input-field">
-            <span class="input-icon">@</span>
+            <span class="input-icon"></span>
             <input type="email" id="emailInput" placeholder="Your Email" autocomplete="email">
           </div>
         </div>
         <div class="input-group">
           <label>Password</label>
           <div class="input-field">
-            <span class="input-icon">*</span>
+            <span class="input-icon"></span>
             <input type="password" id="passwordInput" placeholder="············" autocomplete="current-password">
           </div>
         </div>
@@ -499,14 +527,24 @@
     <!-- PORTAL DASHBOARD SECTION -->
     <div id="portalSection" class="hidden">
       <div class="student-profile">
-        <div class="profile-info">
-          <h3 id="studentName">Student Name</h3>
-          <div class="program" id="studentProgram">Program</div>
-        </div>
-        <div class="profile-meta">
-          <div class="roll-badge" id="displayRoll">ROLL</div>
-          <div class="email-badge" id="displayEmail">email</div>
-          <div id="displayGender" style="font-size:0.7rem; color:#4a5568;"></div>
+        <img
+          src="https://canva.link/okpmo43ij38rjmz"
+          alt="Student Photo"
+          class="student-avatar"
+          id="studentPhoto"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="shield-emblem" style="display:none; width:68px; height:68px; border-radius:50%; font-size:1.6rem;" id="avatarFallback">AR</div>
+        <div class="profile-details">
+          <h3>
+            <span id="studentName">Adeeba Rani</span>
+            <span class="gender-tag" id="displayGenderTag">Female</span>
+          </h3>
+          <div class="program-name" id="studentProgram">Digital Freelance Starter Program</div>
+          <div class="profile-meta-row">
+            <span class="meta-badge" id="displayRoll">SARR-1775201251238-XK363P</span>
+            <span class="email-badge" id="displayEmail">adebach211@gmail.com</span>
+          </div>
         </div>
       </div>
 
@@ -521,10 +559,13 @@
           <div class="cert-icon-placeholder">C</div>
           <div>
             <div class="cert-meta">Certificate Score</div>
-            <div class="cert-score" id="certValueDisplay">0.0</div>
+            <div class="cert-score" id="certValueDisplay">2.86</div>
           </div>
         </div>
-        <div class="cert-tier" id="certLevel">Tier</div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+          <div class="cert-tier" id="certLevel">Bronze · Beginner</div>
+          <span class="cert-percent">2.8572%</span>
+        </div>
       </div>
 
       <button class="btn btn-outline" id="logoutButton">
@@ -539,21 +580,21 @@
   <script>
     (function() {
       // ---------- SARR INSTITUTE STUDENT DATABASE ----------
-      // Credentials: email + password + student record
       const studentDatabase = {
         "adebach211@gmail.com": {
           password: "sarr-12345678",
           student: {
-            name: "Ade Bach",
+            name: "Adeeba Rani",
             roll: "SARR-1775201251238-XK363P",
             email: "adebach211@gmail.com",
             gender: "Female",
             program: "Digital Freelance Starter Program",
+            photoUrl: "https://canva.link/okpmo43ij38rjmz",
             courses: [
               { name: "Digital Freelance Starter Program", status: "Active" }
             ],
-            certificateValue: 88.5,
-            certificateLevel: "Silver · Practitioner"
+            certificateValue: 2.8572,
+            certificateLevel: "Bronze · Beginner"
           }
         },
         "student@sarr.edu": {
@@ -564,12 +605,13 @@
             email: "student@sarr.edu",
             gender: "Male",
             program: "Cybersecurity Fundamentals",
+            photoUrl: "",
             courses: [
               { name: "Network Security Basics", status: "Completed" },
               { name: "Ethical Hacking Intro", status: "In Progress" }
             ],
             certificateValue: 76.0,
-            certificateLevel: "Bronze · Learner"
+            certificateLevel: "Silver · Advanced"
           }
         }
       };
@@ -587,7 +629,9 @@
       const studentProgramEl = document.getElementById('studentProgram');
       const displayRollEl = document.getElementById('displayRoll');
       const displayEmailEl = document.getElementById('displayEmail');
-      const displayGenderEl = document.getElementById('displayGender');
+      const displayGenderTag = document.getElementById('displayGenderTag');
+      const studentPhoto = document.getElementById('studentPhoto');
+      const avatarFallback = document.getElementById('avatarFallback');
       const courseContainer = document.getElementById('courseContainer');
       const certValueDisplay = document.getElementById('certValueDisplay');
       const certLevelEl = document.getElementById('certLevel');
@@ -608,12 +652,37 @@
         hideError();
       }
 
+      function getInitials(name) {
+        if (!name) return 'S';
+        const parts = name.trim().split(' ');
+        if (parts.length >= 2) {
+          return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+        }
+        return name.substring(0, 2).toUpperCase();
+      }
+
       function renderPortal(student) {
         studentNameEl.textContent = student.name;
         studentProgramEl.textContent = student.program;
         displayRollEl.textContent = student.roll;
         displayEmailEl.textContent = student.email;
-        displayGenderEl.innerHTML = `Gender: ${student.gender} <span class="gender-tag">${student.gender}</span>`;
+        displayGenderTag.textContent = student.gender;
+
+        // Handle student photo
+        if (student.photoUrl && student.photoUrl.trim() !== '') {
+          studentPhoto.src = student.photoUrl;
+          studentPhoto.style.display = 'block';
+          avatarFallback.style.display = 'none';
+          studentPhoto.onerror = function() {
+            studentPhoto.style.display = 'none';
+            avatarFallback.style.display = 'flex';
+            avatarFallback.textContent = getInitials(student.name);
+          };
+        } else {
+          studentPhoto.style.display = 'none';
+          avatarFallback.style.display = 'flex';
+          avatarFallback.textContent = getInitials(student.name);
+        }
         
         courseContainer.innerHTML = '';
         if (student.courses && student.courses.length > 0) {
@@ -630,7 +699,7 @@
           courseContainer.innerHTML = '<div class="course-card"><span class="course-title">No active enrollments</span></div>';
         }
 
-        certValueDisplay.textContent = student.certificateValue.toFixed(1);
+        certValueDisplay.textContent = student.certificateValue.toFixed(2);
         certLevelEl.textContent = student.certificateLevel;
       }
 
@@ -681,7 +750,6 @@
 
       loginButton.addEventListener('click', handleLogin);
 
-      // Enter key triggers login
       emailInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -698,7 +766,6 @@
 
       logoutButton.addEventListener('click', showAuth);
 
-      // Clear error on input
       emailInput.addEventListener('input', hideError);
       passwordInput.addEventListener('input', hideError);
 
@@ -714,6 +781,7 @@
           emailInput.value = 'adebach211@gmail.com';
           passwordInput.value = 'sarr-12345678';
           hideError();
+          emailInput.focus();
         });
       }
     })();
